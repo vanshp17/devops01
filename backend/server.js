@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 // Enable Cross-Origin Resource Sharing (CORS)
 // This allows the frontend (running on a different port) to communicate with this backend
 app.use(cors({
-  origin: 'http://localhost:3000' // Adjust this if your React app runs on a different port
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000'
 }));
 
 // Enable Express to parse JSON in the request body

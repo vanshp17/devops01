@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/backend.Dockerfile
+    container_name: backend-service
+    ports:
+      - "5000:5000"
+    env_file:
+      - ../../backend/.env   # using your Atlas URI
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ../..
+      dockerfile: infra/docker/frontend.Dockerfile
+    container_name: frontend-service
+    ports:
+      - "3000:80"
+    env_file:
+      - ../../frontend/.env
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

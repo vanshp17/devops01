@@ -1,20 +1,28 @@
-# Use Node.js LTS
-FROM node:18-alpine
+# ---- build stage ----
+FROM node:18-alpine AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and lock file
-COPY ../../backend/package*.json ./
+# Copy only package.json + lock file
+COPY backend/package*.json ./ 
 
 # Install dependencies
-RUN npm install --production
+RUN npm install --legacy-peer-deps
 
-# Copy backend source
-COPY ../../backend .
+# Copy backend source code
+COPY backend/ ./ 
 
-# Expose backend port
+# ---- runtime stage ----
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy node_modules from build stage
+COPY --from=build /app/node_modules ./node_modules
+
+# Copy backend source code
+COPY backend/ ./ 
+
 EXPOSE 5000
 
-# Start backend
-CMD ["node", "server.js"]
+CMD ["npm", "start"]

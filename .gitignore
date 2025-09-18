@@ -1,52 +1,25 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-
-# Dependency directories
+# Node / Build
 node_modules/
 dist/
 build/
 
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# IDE / editor folders
-.vscode/
-.idea/
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Git
+# Git / Docker
+.git
 .gitignore
-
-# Docker
 .dockerignore
 Dockerfile
-docker-compose.yml
-
-# Markdown / docs
 *.md
+npm-debug.log
+.env
 
 # Terraform
 .terraform/
-.terraform.lock.hcl
 *.tfstate
-*.tfstate.*
-terraform.tfvars
-terraform.tfvars.json
+*.tfstate.backup
+*.tfvars
+*.exe
 crash.log
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
-.terraformrc
-terraform.rc
-
-# Terraform binaries
-terraform.exe
-terraform
